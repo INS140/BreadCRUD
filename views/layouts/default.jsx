@@ -1,15 +1,15 @@
 const React = require('react')
 
-function Default(html) {
+function Default(props) {
     return (
         <html>
             <head>
-                <title>Default</title>
+                <title>{props.title || 'Default'}</title>
             </head>
             <body>
                 <h1>HTML Rendered!</h1>
                 <div className="container">
-                    {html.children}
+                    {props.children}
                 </div>
             </body>
         </html>
