@@ -22,7 +22,7 @@ app.use('/breads', breadsController)
 
 // 404
 app.get('*', (req, res) => {
-    res.send('Oops ... something went wrong!')
+    res.render('Error404', {})
 })
 
 // Server Port
