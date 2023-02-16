@@ -44,7 +44,21 @@ breads.get('/:arrayIndex', (req, res) => {
 breads.delete('/:arrayIndex', (req, res) => {
     Bread.splice(req.params.arrayIndex, 1)
     res.status(303).redirect('/breads')
-  })
-  
+})
+
+// UPDATE
+breads.put('/:arrayIndex', (req, res) => {
+    req.body.hasGluten = req.body.hasGluten === 'on'
+    Bread[req.params.arrayIndex] = req.body
+    res.redirect(`/breads/${req.params.arrayIndex}`)
+})
+
+// EDIT
+breads.get('/:arrayIndex/edit', (req, res) => {
+    res.render('edit', {
+      bread: Bread[req.params.arrayIndex],
+      index: req.params.arrayIndex
+    })
+})
 
 module.exports = breads
