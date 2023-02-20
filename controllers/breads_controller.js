@@ -3,9 +3,11 @@ const breads = express.Router()
 const Bread = require('../models/bread.js')
 
 breads.get('/', (req, res) => {
-    res.render('Index', {
-        breads: Bread,
-        title: 'Index Page'
+    Bread.find().then(data => {
+        res.render('index', {
+            breads: data,
+            title: 'Index Page'
+        })
     })
 })
 
@@ -19,7 +21,7 @@ breads.post('/', (req, res) => {
     } else {
         req.body.hasGluten = 'false'
     }
-    Bread.push(req.body)
+    Bread.create(req.body)
     res.redirect('/breads')
 })
 
@@ -30,14 +32,9 @@ breads.get('/new', (req, res) => {
 
 // SHOW
 breads.get('/:arrayIndex', (req, res) => {
-    if (Bread[req.params.arrayIndex]) {
-        res.render('Show', {
-            bread: Bread[req.params.arrayIndex],
-            index: req.params.arrayIndex
-        })
-    } else {
-        res.status(404).render('Error404')
-    }
+    Bread.findById(req.params.arrayIndex)
+        .then(data => {res.render('show', { bread: data })})
+        .catch(() => {res.status(404).render('error404')})
 })
 
 // DELETE
