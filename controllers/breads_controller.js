@@ -4,12 +4,17 @@ const Bread = require('../models/bread.js')
 const Baker = require('../models/baker.js')
 
 breads.get('/', (req, res) => {
-    Bread.find().then(data => {
-        res.render('index', {
-            breads: data,
-            title: 'Index Page'
+    Baker.find()
+        .then(bakers => {
+            Bread.find().then(breads => {
+                res.render('index', {
+                    breads: breads,
+                    bakers: bakers,
+                    title: 'Index Page'
+                })
+            })
         })
-    })
+    
 })
 
 // CREATE
