@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const breadsController = require('./controllers/breads_controller')
+const bakersController = require('./controllers/bakers_controller')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 
@@ -28,6 +29,8 @@ app.get('/', (req, res) => {
 
 
 app.use('/breads', breadsController)
+
+app.use('/bakers', bakersController)
 
 // 404
 app.get('*', (req, res) => {
