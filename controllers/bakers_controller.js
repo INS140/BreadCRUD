@@ -17,7 +17,11 @@ baker.get('/data/seed', async (req, res) => {
 
 // SHOW
 baker.get('/:id', async (req, res) => {
-    const baker = await Baker.findById(req.params.id).populate('breads')
+    const baker = await Baker.findById(req.params.id)
+        .populate({
+            path: 'breads',
+            options: { limit: 5 }
+        })
     res.render('bakerShow', { baker: baker })
 })
 

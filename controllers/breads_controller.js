@@ -4,8 +4,8 @@ const Bread = require('../models/bread.js')
 const Baker = require('../models/baker.js')
 
 breads.get('/', async (req, res) => {
-    const bakers = await Baker.find()
-    const breads = await Bread.find()
+    const bakers = await Baker.find().lean()
+    const breads = await Bread.find().lean()
     res.render('index', {
         breads: breads,
         bakers: bakers,
@@ -61,6 +61,13 @@ breads.get('/data/seed', async (req, res) => {
     res.redirect('/breads')
 })
 
+// EDIT
+breads.get('/:id/edit', async (req, res) => {
+    const bakers = await Baker.find()
+    const bread = await Bread.findById(req.params.id)
+    res.render('edit', { bread: bread, bakers: bakers })
+})
+
 // SHOW
 breads.get('/:id', async (req, res) => {
     try {
@@ -84,13 +91,6 @@ breads.put('/:id', async (req, res) => {
     req.body.hasGluten = req.body.hasGluten === 'on'
     await Bread.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.redirect(`/breads/${req.params.id}`)
-})
-
-// EDIT
-breads.get('/:id/edit', async (req, res) => {
-    const bakers = await Baker.find()
-    const bread = await Bread.findById(req.params.id)
-    res.render('edit', { bread: bread, bakers: bakers })
 })
 
 module.exports = breads
