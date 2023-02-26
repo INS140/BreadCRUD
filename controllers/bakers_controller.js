@@ -11,6 +11,11 @@ baker.get('/', (req, res) => {
         })
 })
 
+baker.get('/data/seed', (req, res) => {
+    Baker.insertMany(bakerSeedData)
+        .then(res.redirect('/breads'))
+})
+
 baker.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
         .populate('breads')
@@ -19,9 +24,15 @@ baker.get('/:id', (req, res) => {
         })
 })
 
-baker.get('/data/seed', (req, res) => {
-    Baker.insertMany(bakerSeedData)
-        .then(res.redirect('/breads'))
+baker.delete('/:id', (req, res) => {
+    Baker.findByIdAndDelete(req.params.id)
+        .then(baker => {
+            res.status(303).redirect('/breads')
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(404).render('error404')
+        })
 })
 
 module.exports = baker                    
