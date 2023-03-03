@@ -41,3 +41,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log("IT'S ALIVE!!!! on port:", PORT)
 })
+
+module.exports = app
