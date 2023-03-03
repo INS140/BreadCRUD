@@ -24,7 +24,7 @@ app.use(methodOverride('_method'))
 
 //Routes
 app.get('/', (req, res) => {
-    res.send('Welcome to an Awesome App about Bread!')
+    res.render('home')
 })
 
 
@@ -34,7 +34,7 @@ app.use('/bakers', bakersController)
 
 // 404
 app.get('*', (req, res) => {
-    res.render('Error404', {})
+    res.render('error404', {})
 })
 
 // Server Port
