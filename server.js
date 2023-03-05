@@ -1,3 +1,4 @@
+require('./babel-server')
 require('dotenv').config()
 const express = require('express')
 const breadsController = require('./controllers/breads_controller')
