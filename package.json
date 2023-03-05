@@ -21,7 +21,7 @@
   "homepage": "https://github.com/INS140/BreadCRUD#readme",
   "dependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.21.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
