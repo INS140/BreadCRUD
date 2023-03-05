@@ -1,22 +1,22 @@
 const express = require('express')
-const baker = express.Router()
+const bakers = express.Router()
 const Baker = require('../models/baker.js')
 const bakerSeedData = require('../models/baker_seed.js')
 
 // Object Array Reference
-baker.get('/', async (req, res) => {
+bakers.get('/', async (req, res) => {
     const bakers = Baker.find().populate('breads')
     res.send(bakers)
 })
 
 // SEED DATA
-baker.get('/data/seed', async (req, res) => {
+bakers.get('/data/seed', async (req, res) => {
     await Baker.insertMany(bakerSeedData)
     res.redirect('/breads')
 })
 
 // SHOW
-baker.get('/:id', async (req, res) => {
+bakers.get('/:id', async (req, res) => {
     const baker = await Baker.findById(req.params.id)
         .populate({
             path: 'breads',
@@ -26,7 +26,7 @@ baker.get('/:id', async (req, res) => {
 })
 
 // DELETE
-baker.delete('/:id', async (req, res) => {
+bakers.delete('/:id', async (req, res) => {
     try {
         await Baker.findByIdAndDelete(req.params.id)
         res.status(303).redirect('/breads')
@@ -37,4 +37,4 @@ baker.delete('/:id', async (req, res) => {
     }
 })
 
-module.exports = baker
+module.exports = bakers

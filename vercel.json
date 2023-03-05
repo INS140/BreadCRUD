@@ -1,1 +1,8 @@
-{}
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destinations": "/server.js"
+    }
+  ]
+}
