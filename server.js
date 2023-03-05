@@ -11,7 +11,7 @@ const app = express()
 // Connect Mongoose
 mongoose.set({strictQuery: true})
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
-    () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
+    () => { console.log('connected to mongo') }
 )
 
 //Middleware
@@ -39,7 +39,7 @@ app.get('*', (req, res) => {
 
 // Server Port
 app.listen(PORT, () => {
-    console.log("IT'S ALIVE!!!! on port:", PORT)
+    console.log("IT'S ALIVE!!!!")
 })
 
 module.exports = app
